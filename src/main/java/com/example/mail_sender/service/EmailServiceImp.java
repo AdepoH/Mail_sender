@@ -21,23 +21,9 @@ public class EmailServiceImp implements EmailService {
     @Override
     public void sendEmail(Email email) {
 
-        // Set up the JavaMail properties
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com"); // Change to your SMTP server
-        properties.put("mail.smtp.port", "587"); // Change to the appropriate port
-
-        // Create a session with the authentication
-        Session session = Session.getInstance(properties, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication();
-            }
-        });
-
         try {
             // Create a message
-            Message message = new MimeMessage(session);
+            Message message = new MimeMessage(body);
             message.setFrom(new InternetAddress(senderEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             message.setSubject("Hello from JavaMail");
